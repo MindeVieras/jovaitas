@@ -1,0 +1,16 @@
+
+name = Jovaitas
+description = Tema sukurta Jovaitas elektroninei parduotuvei.
+version = VERSION
+core = 7.x
+
+stylesheets[all][] = css/style.css
+
+scripts[] = js/illbeback.min.js
+scripts[] = js/jquery.sweet-dropdown.js
+scripts[] = js/jova.js
+
+regions[header] = Header
+regions[content] = Content
+regions[sidebar_first] = Sidebar first
+regions[footer] = Footer

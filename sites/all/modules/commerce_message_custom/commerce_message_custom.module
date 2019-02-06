@@ -1,0 +1,12 @@
+<?php
+
+ function commerce_message_custom_message_presave($message) {
+   if (!empty($message->mid) || $message->type != 'nauja_zinia') {
+     return;
+   }
+
+   $message->arguments['!order-summary'] = array(
+     'callback' => 'commerce_message_order_summary',
+     'pass message' => TRUE,
+   );
+ }
