@@ -1,8 +1,9 @@
-<header>
+<header id="main-header">
 
-  <div id="header_top_message">
-    Teksta cia!
-  </div>
+  <?php
+    $block_top_bar = module_invoke('jovaitas', 'block_view', 'block_top_bar');
+    print $block_top_bar['content'];
+  ?>
 
   <div class="header-top"><div class="container">
 

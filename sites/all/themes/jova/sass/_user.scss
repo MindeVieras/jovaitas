@@ -1,0 +1,53 @@
+.page-user{
+    .tabs{display:none}
+    .content{
+        form{
+            h1{    
+                display: inline-block;
+                float: left;
+                width: 100%;
+                font-size: 22px;
+                font-family: "Open Sans",sans-serif;
+                color: #151515;
+                font-weight: 300;
+                border-bottom: 1px solid #e1e1e1;
+                margin-bottom: 20px;
+                padding: 30px 0;
+            }
+            label{width:100%}
+            .form-text{width:50%}
+        }
+    }
+    .field-name-commerce-customer-billing{display:none}
+}
+ul.profile-items{
+	display: inline-block;
+	width: 100%;
+	li{
+		display: inline-block;
+		width: 50%;
+		float: left;
+		@include mq(xs){width:100%;margin-bottom:25px}
+		&:nth-child(2){display:none}
+		h4{
+			font-family: "Roboto",sans-serif;
+			font-size: 24px;
+			color: #484747;
+			font-weight: 200;
+			margin: 0 0 20px 0;
+		}
+	}
+	&:nth-child(2){margin-top:25px;li{width:100%}}
+}
+ul.profile-items>li>div>a{
+	width: auto;
+	display: inline-block;
+	text-transform: uppercase;
+	background: transparent;
+	border: 1px solid #81cfdc;
+	padding: 5px 20px;
+	height: 28px;
+	font-size: 15px;
+	color: #6a6a6a;
+	&:hover{background:#81cfdc;color:#fff}
+}
