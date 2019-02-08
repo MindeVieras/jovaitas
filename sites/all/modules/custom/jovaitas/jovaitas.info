@@ -1,6 +1,4 @@
 name = Jovaitas
-description = Modulis jovaitas.lt parduotuvei.
+description = Pirminis modulis jovaitas.lt parduotuvei.
 core = 7.x
 package = Jovaitas
-
-dependencies[] = drupal:block

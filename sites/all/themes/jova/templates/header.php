@@ -60,6 +60,6 @@
 </header>
 
 <?php
-  $block_top_bar = module_invoke('jovaitas', 'block_view', 'block_top_bar');
+  $block_top_bar = module_invoke('jovaitas_topbar', 'block_view', 'block_top_bar');
   print $block_top_bar['content'];
 ?>

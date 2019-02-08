@@ -6,9 +6,8 @@
  */
 
 
-// Include all functions
+// Include all admin settings form
 module_load_include('inc', 'jovaitas', 'includes/admin.settings');
-module_load_include('inc', 'jovaitas', 'includes/block.top_bar');
 
 function is_shop_admin() {
   

@@ -1,15 +1,14 @@
 <?php
 /**
  * @file
- * Install, update and uninstall functions for the jovaitas module.
+ * Install, update and uninstall functions for the jovaitas_topbar module.
  */
 
 /**
  * Implements hook_uninstall().
  *
- * @ingroup jovaitas
  */
-function jovaitas_uninstall() {
+function jovaitas_topbar_uninstall() {
 
   // Delete top bar block content variable
   variable_del('top_bar_content');
