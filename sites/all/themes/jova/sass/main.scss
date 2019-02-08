@@ -14,6 +14,11 @@ body{
     font-family: ubuntu;
     font-size: 16px;
 }
+
+strong {
+  font-weight: bold;
+}
+
 a{
 	text-decoration: none;
     -webkit-transition: all 0.3s ease-out;
@@ -57,7 +62,7 @@ input.form-submit, .button{
     display: inline-block;
     text-transform: uppercase;
     background: transparent;
-    border: 1px solid #c2d44e;
+    border: 1px solid #81cfdc;
     padding: 0 20px;
     height: 38px;
     font-size: 15px;
@@ -68,7 +73,7 @@ input.form-submit, .button{
     -ms-transition: all 0.3s ease-out;
     -o-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
-    &:hover{background-color:#c2d44e;color:#fff}
+    &:hover{background-color:#81cfdc;color:#fff}
 }
 .form-item{
     margin-bottom: 15px;
@@ -190,7 +195,7 @@ legend{
     @include mq(xs){display:none}
     a{
     	color: #151515;
-    	&:hover{color:#c2d44e}
+    	&:hover{color:#81cfdc}
     }
 }
 
@@ -211,21 +216,44 @@ legend{
         &:hover{background:#24282e}
     }
 }
-.flexslider{
-    .field-name-field-link{
-        a{
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            font-size: 0;
-        }
+
+.flexslider {
+  border: none;
+
+  .field-name-field-link {
+    
+    a {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 0;
     }
-    .views-field-edit-node{position:absolute;left:5px;bottom:5px}
+  }
+  
+  .views-field-title {
+    position: absolute;
+    bottom: 4%;
+    left: 10%;
+    font-size: 46px;
+    font-weight: bold;
+    color: rgba(0, 38, 200, 0.75);
+    text-shadow: 0px 1px 0px #ddd;
+
+    @include mq(sm){font-size:36px}
+    @include mq(xxs){font-size:24px}
+  }
+
+  .views-field-edit-node{
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+  }
 }
+
 .page-contact{
     .conts-block{
         display: inline-block;
@@ -324,7 +352,7 @@ legend{
             font-size: 15px;
             line-height: 18px;
             color: #646565;
-            &:hover{color:#c2d44e}
+            &:hover{color:#81cfdc}
         }
     }
     .price{
@@ -394,7 +422,7 @@ legend{
             opacity: 0;
             width: 33px;
             height: 33px;
-            background: #c2d44e;
+            background: #81cfdc;
             line-height: 35px;
             text-align: center;
             font-size: 18px;
@@ -442,13 +470,13 @@ legend{
         position: absolute;
         right: 15px;
         top: 10px;
-        background: #c2d44e;
-        border: 1px solid #c2d44e;
+        background: #81cfdc;
+        border: 1px solid #81cfdc;
         border-radius: 50%;
         transition: all 0.3s ease;
         @include mq(slg){right:5px;text-align:left}
         &:hover{background:#fff}
-        &:hover i{color:#c2d44e}
+        &:hover i{color:#81cfdc}
         form{position:relative;z-index:1}
         i{
             position: absolute;
@@ -505,7 +533,7 @@ legend{
         margin-top: 10px;
     }
     .price{
-        color: #81cfdc;
+        color: #0026c8;
         font-size: 21px;
         display: block;
         margin-right: 60px;
@@ -539,10 +567,10 @@ legend{
     -webkit-border-radius: 2px;
     border-radius: 2px;
     background-clip: padding-box;
-    border: 1px solid #c2d44e;
+    border: 1px solid #81cfdc;
     background: #fff;
     text-align: center;
-    color: #c2d44e;
+    color: #81cfdc;
     line-height: 33px;
     font-size: 26px;
     position: absolute;
@@ -553,7 +581,7 @@ legend{
     opacity: 0;
     transition: all 0.3s ease;
     &:hover{
-        background: #c2d44e;
+        background: #81cfdc;
         color: #fff;
     }
 }}
@@ -668,7 +696,7 @@ ul.pager{
         padding: 9px 15px;
         border: 1px solid #e1e1e1;
         color: #656565;
-        &:hover{background:#c2d44e;color:#fff}
+        &:hover{background:#81cfdc;color:#fff}
     }
 }
 .filters{

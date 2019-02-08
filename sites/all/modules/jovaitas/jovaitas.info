@@ -1,6 +1,6 @@
 name = Jovaitas
 description = Modulis jovaitas.lt parduotuvei.
 core = 7.x
-package = Mindelis
+package = Jovaitas
 
-files[] = jovaitas.module
+dependencies[] = drupal:block
