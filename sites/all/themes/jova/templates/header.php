@@ -1,9 +1,4 @@
-<header id="main-header">
-
-  <?php
-    $block_top_bar = module_invoke('jovaitas', 'block_view', 'block_top_bar');
-    print $block_top_bar['content'];
-  ?>
+<header>
 
   <div class="header-top"><div class="container">
 
@@ -62,4 +57,12 @@
 
   </div>
 
+
+<!--   <?php if ($main_menu): ?>
+    <div id="main-nav">
+      <div class="container">
+        <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('id' => 'main-menu', 'class' => array('nav', 'navbar-nav')), 'heading' => false)); ?>
+      </div>
+    </div>
+  <?php endif; ?> -->
 </header>
