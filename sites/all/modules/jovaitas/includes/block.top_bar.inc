@@ -106,8 +106,7 @@ function jovaitas_block_view($delta = '') {
 function _top_bar_content_callback() {
 
   $content = variable_get('top_bar_content', 'Viršutines juostos tekstas.');
-  // This is where the $items get sent to your my-template.tpl.php template
-  // that got registered below.
+
   $edit_url = "/admin/structure/block/manage/jovaitas/block_top_bar/configure";
   return theme('top_bar_template', ['content' => $content, 'edit_url' => $edit_url]);
 }
