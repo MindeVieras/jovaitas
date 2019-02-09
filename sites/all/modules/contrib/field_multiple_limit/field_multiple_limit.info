@@ -3,11 +3,13 @@ description = Provides extra field formatter settings to specify the number of v
 core = 7.x
 package = Fields
 
+files[] = field_multiple_limit.test
+
 dependencies[] = field_formatter_settings
 
-; Information added by drupal.org packaging script on 2013-02-20
-version = "7.x-1.0-alpha4"
+; Information added by Drupal.org packaging script on 2016-09-26
+version = "7.x-1.0-alpha5"
 core = "7.x"
 project = "field_multiple_limit"
-datestamp = "1361374879"
+datestamp = "1474931040"
 
