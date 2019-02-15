@@ -1,0 +1,46 @@
+
+// .karusele{
+//   .prod-block{
+//       margin-right: 10px;
+//       margin-left: 10px;
+//       float: none;
+//       width: 277px;
+//       .org-price{margin-top:6px}
+//   }
+//   &:hover .owl-buttons{div{visibility:visible;opacity:1}}
+//   &:hover .owl-prev{left:0px}
+//   &:hover .owl-next{right:0px}
+// }
+// .owl-carousel{@include mq(xs){text-align:center}}
+// .owl-buttons{div{
+//   display: inline-block;
+//   width: 36px;
+//   height: 36px;
+//   cursor: pointer;
+//   -webkit-border-radius: 2px;
+//   border-radius: 2px;
+//   background-clip: padding-box;
+//   border: 1px solid #81cfdc;
+//   background: #fff;
+//   text-align: center;
+//   color: #81cfdc;
+//   line-height: 33px;
+//   font-size: 26px;
+//   position: absolute;
+//   top: 50%;
+//   margin-top: -18px;
+//   z-index: 5;
+//   visibility: hidden;
+//   opacity: 0;
+//   transition: all 0.3s ease;
+//   &:hover{
+//       background: #81cfdc;
+//       color: #fff;
+//   }
+// }}
+// .owl-prev{
+//   left: -25px;
+// }
+// .owl-next{
+//   right: -25px;
+// }

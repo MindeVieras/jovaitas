@@ -11,12 +11,6 @@ function jova_preprocess_html(&$vars) {
   drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css', array(
    'type' => 'external'
   ));
-  // drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css', array(
-  //  'type' => 'external'
-  // ));
-  // drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css', array(
-  //  'type' => 'external'
-  // ));
 	drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css', array(
 		'type' => 'external'
 	));
@@ -26,9 +20,6 @@ function jova_preprocess_html(&$vars) {
 	drupal_add_js('https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js', array(
 		'type' => 'external'
 	));
-	// drupal_add_js('https://cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.3/jquery.sticky.min.js', array(
-	// 	'type' => 'external'
-	// ));
 }
 
 /**
@@ -44,9 +35,9 @@ function jova_preprocess_page(&$variables) {
  */
 function jova_css_alter(&$css) {
   unset($css['modules/poll/poll.css']);
-  //unset($css['modules/system/system.base.css']);
   unset($css['modules/system/system.menus.css']);
   unset($css['modules/system/system.theme.css']);
+  unset($css['modules/node/node.css']);
   unset($css['profiles/commerce_kickstart/modules/contrib/views/css/views.css']);
 }
 /**
