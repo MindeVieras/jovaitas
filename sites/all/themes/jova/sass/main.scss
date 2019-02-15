@@ -1,5 +1,12 @@
-@import 'reset';
-@import 'mixings';
+@import 'base/reset';
+@import 'base/mixings';
+
+@import 'dropdown';
+@import 'user';
+@import 'product';
+@import 'cart';
+@import 'sidebar';
+@import 'footer';
 
 .krumo-footnote img{
     width: auto!important;
@@ -760,9 +767,3 @@ ul.pager{
         }
     }
 }
-@import 'dropdown';
-@import 'user';
-@import 'product';
-@import 'cart';
-@import 'sidebar';
-@import 'footer';
