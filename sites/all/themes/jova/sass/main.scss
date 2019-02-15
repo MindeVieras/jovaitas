@@ -650,15 +650,26 @@ legend{
 }
 .grazinimai{
     position: relative;
+    
     .info-text{
-        position: absolute;
-        top: 80px;
-        right: 25px;
-        width: 320px;
-        font-size: 24px;
-        line-height: 36px;
-        @include mq(slg){top:100px;right:0px;width:290px}
-        @include mq(xs){position:static;margin-bottom:25px}
+      position: absolute;
+      top: 80px;
+      right: 25px;
+      width: 320px;
+      font-size: 24px;
+      line-height: 36px;
+
+      h3 {
+        color: #151515;
+        font-size: 18px;
+      }
+
+      @include mq(slg){top:100px;right:0px;width:290px}
+      @include mq(xs){
+        position: static;
+        margin-top: 50px;
+        margin-bottom: 25px;
+      }
     }
     .form-item{
         &.webform-component--vardas{width:50%;@include mq(xs){width:100%}}
