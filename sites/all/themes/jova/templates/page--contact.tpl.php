@@ -6,6 +6,8 @@
 
     <div class="container"><div id="main">
 
+      <div id="main_preloader"></div>
+      
       <div id="content">
 
         <?php if($title || $breadcrumb): ?>

@@ -5,19 +5,7 @@
  */
 function jova_preprocess_html(&$vars) {
 
-  drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css', array(
-   'type' => 'external'
-  ));
-  drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css', array(
-   'type' => 'external'
-  ));
-	drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css', array(
-		'type' => 'external'
-	));
-	drupal_add_js('https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js', array(
-		'type' => 'external'
-	));
-	drupal_add_js('https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js', array(
+	drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', array(
 		'type' => 'external'
 	));
 }
@@ -26,8 +14,8 @@ function jova_preprocess_html(&$vars) {
  * Implements hook_preprocess_page().
  */
 function jova_preprocess_page(&$variables) {
-  drupal_add_library('system', 'ui');
-  drupal_add_library('system', 'ui.tabs');
+  // drupal_add_library('system', 'ui');
+  // drupal_add_library('system', 'ui.tabs');
 }
 
 /**
@@ -37,6 +25,8 @@ function jova_css_alter(&$css) {
   unset($css['modules/poll/poll.css']);
   unset($css['modules/system/system.menus.css']);
   unset($css['modules/system/system.theme.css']);
+  unset($css['misc/ui/jquery.ui.core.css']);
+  unset($css['misc/ui/jquery.ui.theme.css']);
   unset($css['modules/node/node.css']);
   unset($css['profiles/commerce_kickstart/modules/contrib/views/css/views.css']);
 }
@@ -84,8 +74,37 @@ function jova_breadcrumb($variables) {
 /**
  * Implements hook_menu_tree().
  */
-function jova_menu_tree($variables) {
-  return '<ul class="side-menu">' . $variables['tree'] . '</ul>';
+function jova_menu_tree__menu_kategorijos($variables) {
+  return '<ul class="categories-menu">' . $variables['tree'] . '</ul>';
+}
+
+/**
+ * Implements hook_menu_link().
+ */
+function jova_menu_link($variables) {
+
+  // Default menu output
+  $element = $variables['element'];
+  $sub_menu = '';
+  if ($element['#below']) {
+    $sub_menu = drupal_render($element['#below']);
+  }
+  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+
+  // Categories menu output
+  if ($element['#original_link']['menu_name'] == 'menu-kategorijos') {
+    $arrow_icon = '';
+    $menu_link = l($element['#title'], $element['#href'], $element['#localized_options']);
+
+    // Append arrow icon if #below (submenu)
+    if ($element['#below']) {
+      $arrow_icon = '<div class="expand-icon"><i class="fa fa-chevron-right"></i></div>';
+    }
+    $output = '<span class="cat-link">' . $menu_link . $arrow_icon . '</span>';
+
+  }
+
+  return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
 }
 
 /**

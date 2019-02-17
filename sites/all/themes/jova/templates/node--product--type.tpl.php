@@ -5,69 +5,71 @@
     $lang = $node_prod->language;
   ?>
 
-  <div class="prod-img-popup">
-    <?php    
-      $prod_img_uri = $node_prod->field_images['und'];
-      //sort($prod_img_uri, SORT_NUMERIC);
-      foreach ($prod_img_uri as $prodimg) {
-        print '<a href="'.image_style_url('fullhd', $prodimg['uri']).'" style="background-image:url('.image_style_url('large', $prodimg['uri']).')"></a>';
-      }
-    ?>
-  </div>
-
-  <div class="summary">
-    <h2 class="title">
-    <?php
-      $org_title = $node_prod->title;
-      print preg_replace('/\([^)]+\)/','',$org_title);
-    ?>
-    </h2>
-
-    <div class="kodas"><?php print '<span>'.t('Kodas:').'</span>';print $node_prod->sku; ?></div>
-
-    <div class="price">
-      <?php
-        $org_amount = $node_prod->commerce_price[$lang][0]['original']['amount'];
-        $currency_code = $node_prod->commerce_price[$lang][0]['currency_code'];
-
-        $org_price = commerce_currency_format($org_amount, $currency_code, $object = NULL, $convert = TRUE);
-        
-        if (!empty($node_prod->field_akcija)) {
-          print '<div class="org-price"><del>'.$org_price.'</del></div>';
+  <div id="product_summary">
+    <div class="prod-img-popup" id="product_carousel">
+      <?php    
+        $prod_img_uri = $node_prod->field_images['und'];
+        //sort($prod_img_uri, SORT_NUMERIC);
+        foreach ($prod_img_uri as $prodimg) {
+          print '<a href="'.image_style_url('fullhd', $prodimg['uri']).'" class="image" style="background-image:url('.image_style_url('large', $prodimg['uri']).')"></a>';
         }
-        
-        print render($content['product:commerce_price']);
       ?>
     </div>
 
-    <div class="add-to-cart">
-      <?php print render($content['field_product']);?>
-    </div>
+    <div class="summary">
+      <h2 class="title">
+        <?php
+          $org_title = $node_prod->title;
+          print preg_replace('/\([^)]+\)/','',$org_title);
+        ?>
+      </h2>
 
-    <div class="details">
-      <?php if(isset($node_prod->field_tipas)){
-        print '<div class="detail"><span>'.t('Tipas:').'</span>'.$node_prod->field_tipas['und'][0]['value'].'</div>';
-      }?>
-      <?php if(isset($node_prod->field_tipas_lemp)){
-        print '<div class="detail"><span>'.t('Tipas:').'</span>'.$node_prod->field_tipas_lemp['und'][0]['value'].'</div>';
-      }?>
-      <?php if(isset($node_prod->field_voltazas)){
-        if ($node_prod->field_voltazas['und'][0]['value'] == 1){
-          $volt_val = '12v';
-        }
-        if ($node_prod->field_voltazas['und'][0]['value'] == 2){
-          $volt_val = '24v';
-        }
-        print '<div class="detail"><span>'.t('Voltažas:').'</span>'.$volt_val.'</div>';
-      }?>
-      <?php if(isset($node_prod->field_galingumas)){
-        print '<div class="detail"><span>'.t('Galingumas:').'</span>'.$node_prod->field_galingumas['und'][0]['value'].' w</div>';
-      }?>
-      <?php if(isset($node->field_gamintojas['und'][0]['taxonomy_term'])){
-        print '<div class="detail"><span>'.t('Gamintojas:').'</span>'.$node->field_gamintojas['und'][0]['taxonomy_term']->name.'</div>';
-      }?>
+      <div class="kodas"><?php print '<span>'.t('Kodas:').'</span>';print $node_prod->sku; ?></div>
+
+      <div class="price">
+        <?php
+          $org_amount = $node_prod->commerce_price[$lang][0]['original']['amount'];
+          $currency_code = $node_prod->commerce_price[$lang][0]['currency_code'];
+
+          $org_price = commerce_currency_format($org_amount, $currency_code, $object = NULL, $convert = TRUE);
+          
+          if (!empty($node_prod->field_akcija)) {
+            print '<div class="org-price"><del>'.$org_price.'</del></div>';
+          }
+          
+          print render($content['product:commerce_price']);
+        ?>
+      </div>
+
+      <div class="add-to-cart">
+        <?php print render($content['field_product']);?>
+      </div>
+
+      <div class="details">
+        <?php if(isset($node_prod->field_tipas)){
+          print '<div class="detail"><span>'.t('Tipas:').'</span>'.$node_prod->field_tipas['und'][0]['value'].'</div>';
+        }?>
+        <?php if(isset($node_prod->field_tipas_lemp)){
+          print '<div class="detail"><span>'.t('Tipas:').'</span>'.$node_prod->field_tipas_lemp['und'][0]['value'].'</div>';
+        }?>
+        <?php if(isset($node_prod->field_voltazas)){
+          if ($node_prod->field_voltazas['und'][0]['value'] == 1){
+            $volt_val = '12v';
+          }
+          if ($node_prod->field_voltazas['und'][0]['value'] == 2){
+            $volt_val = '24v';
+          }
+          print '<div class="detail"><span>'.t('Voltažas:').'</span>'.$volt_val.'</div>';
+        }?>
+        <?php if(isset($node_prod->field_galingumas)){
+          print '<div class="detail"><span>'.t('Galingumas:').'</span>'.$node_prod->field_galingumas['und'][0]['value'].' w</div>';
+        }?>
+        <?php if(isset($node->field_gamintojas['und'][0]['taxonomy_term'])){
+          print '<div class="detail"><span>'.t('Gamintojas:').'</span>'.$node->field_gamintojas['und'][0]['taxonomy_term']->name.'</div>';
+        }?>
+      </div>
+    
     </div>
-  
   </div>
   
   <div id="tabs">

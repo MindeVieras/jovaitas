@@ -1,0 +1,108 @@
+
+.karusele-wrapper {
+  margin: $space * 5 0;
+
+  header {
+    display: flex;
+
+    h2 {
+      flex: 1;
+    }
+
+    .karusele-arrows {
+      display: flex;
+      margin-top: $space / 2;
+    }
+
+    .carousele-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $spray;
+      width: $space * 4.5;
+      height: $space * 4;
+      color: $spray;
+      margin-left: $space;
+      cursor: pointer;
+
+      &.slick-disabled {
+        background-color: $white!important;
+        color: $md-grey-200!important;
+        border: 1px solid $md-grey-200!important;
+        cursor: initial;
+      }
+
+      &:hover, &:focus {
+        background-color: $spray;
+        color: $white;
+      }
+    }
+  }
+
+  .karusele {
+    overflow: hidden;
+  
+    .slick-list {
+      margin-right: -18px;
+    }
+
+    .slick-track {
+      display: flex;
+    }
+  
+    .slick-slide {
+      margin-right: 20px;
+    }
+
+    .prod-block {
+      margin-bottom: 0;
+    }
+  }
+}
+
+#product_carousel {
+
+  .carousele-arrow {
+    background-color: $white;
+    display: flex!important;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 45%;
+    left: 0 - $space * 4;
+    width: $space * 4;
+    height: $space * 6;
+    color: $spray;
+    border: 1px solid $spray;
+    z-index: 1;
+    cursor: pointer;
+
+    &.carousele-next {
+      left: auto;
+      right: 0 - $space * 4;
+    }
+
+    &.slick-disabled {
+      display: none!important;
+    }
+
+    &:hover {
+      background-color: $spray;
+      color: $white;
+    }
+  }
+
+  &:hover {
+
+    .carousele-arrow {
+      opacity: 1;
+      left: 0 - $space * 1.5;
+
+      &.carousele-next {
+        left: auto;
+        right: 0 - $space * 1.5;
+      }
+    }
+  }
+}

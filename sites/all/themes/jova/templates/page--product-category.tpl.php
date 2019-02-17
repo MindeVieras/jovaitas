@@ -6,8 +6,10 @@
 
     <div class="container"><div id="main">
 
+      <div id="main_preloader"></div>
+
       <div id="content">
-      
+        
         <?php if($title || $breadcrumb): ?>
           <div id="content-top">
             <h1 class="title" id="page-title"><?php print $title; ?></h1>

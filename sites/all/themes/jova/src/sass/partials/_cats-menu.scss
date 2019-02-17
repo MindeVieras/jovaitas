@@ -1,0 +1,164 @@
+
+#categories_sidebar {
+  border: 1px solid #f0f0f0;
+  border-radius: 2px;
+
+  @include mq(md){
+    margin-top: $space * 4;
+  }
+
+  .block-title {
+    padding: $space * 2.5 $space * 2;
+    margin: 0;
+    border-bottom: 1px solid $md-grey-300;
+  }
+
+  > .categories-menu {
+
+    .cat-link {
+      background-color: $white;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid $md-grey-300;
+      line-height: 24px;
+
+      a {
+        flex: 1;
+        padding: $space * 1.5 $space * 2;
+      }
+
+      .expand-icon {
+        display: flex;
+        align-items: center;
+        padding-left: $space;
+        cursor: pointer;
+
+        i {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: $space;
+          width: $space * 3.5;
+          height: $space * 3.5;
+          border: 1px solid transparent;
+          border-radius: 50%;
+
+          &:before {
+            margin-left: $space * 0.25;
+          }
+        }
+
+        &:hover {
+
+          i {
+            background-color: $spray;
+            color: $white!important;
+            border: 1px solid $white!important;
+          }
+        }
+      }
+
+      &:hover {
+        background-color: $md-grey-100;
+      }
+    }
+
+    > .active-trail {
+      
+      > .cat-link {
+        background-color: $md-grey-300!important;
+      }
+    }
+
+    // Last menu item
+    > .last.leaf {
+
+      .cat-link {
+        border-bottom: 0;
+      }
+    }
+
+    // Submenu
+    .categories-menu {
+      max-height: 0;
+      overflow: hidden;
+
+      .cat-link {
+        background-color: $md-grey-50;
+        font-size: 15px;
+        line-height: 22px;
+
+        a {
+          padding: $space $space * 2.5;
+        }
+
+        &:hover {
+          background-color: $md-grey-100;
+        }
+      }
+
+      .active-trail {
+        background-color: $md-grey-200;
+      }
+    }
+
+    .expanded {
+
+      &.open {
+
+        > .cat-link {
+          background-color: $md-grey-200;
+        }
+
+        .expand-icon {
+
+          i {
+            transform: rotate(90deg);
+          }
+        }
+
+        .categories-menu {
+          max-height: 500px;
+        }
+      }
+
+      > .cat-link {
+
+        &:hover {
+          
+          .expand-icon {
+
+            i {
+              border: 1px solid $spray;
+              color: $spray;
+            }
+          }
+        }
+      }
+    }
+
+    @include mq(md){
+      display: flex;
+      flex-wrap: wrap;
+
+      > li {
+        width: 50%;
+        float: left;
+
+        &.open {
+          width: 100%;
+          margin-top: -1px;
+        }
+      }
+    }
+
+    @include mq(xs){
+      
+      > li {
+        width: 100%;
+      }
+    }
+
+  }
+}
+

@@ -1,4 +1,4 @@
-<div class="owl-karusele owl-carousel">
+<div class="karusele">
 
   <?php if ($rows): ?>
       <?php print $rows; ?>

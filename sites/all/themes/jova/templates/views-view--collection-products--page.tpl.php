@@ -92,7 +92,7 @@
   <?php endif; ?>
 
   <?php if ($rows): ?>
-  <div class="view-content">
+  <div class="products-container">
     <?php print $rows;
 		//echo '<script> product_boxes("code") </script>';
 		?>

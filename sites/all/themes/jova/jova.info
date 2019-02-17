@@ -4,11 +4,9 @@ description = Tema sukurta Jovaitas elektroninei parduotuvei.
 version = VERSION
 core = 7.x
 
-stylesheets[all][] = css/style.css
+stylesheets[all][] = dist/style.css
 
-scripts[] = js/illbeback.min.js
-scripts[] = js/jquery.sweet-dropdown.js
-scripts[] = js/jova.js
+scripts[] = dist/jova.js
 
 regions[header] = Header
 regions[content] = Content
