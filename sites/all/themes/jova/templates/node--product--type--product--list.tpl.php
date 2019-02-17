@@ -20,7 +20,7 @@
   	<?php
       if (isset($list_prod->commerce_price[$lang][0]['original'])){
         if (($list_prod->commerce_price[$lang][0]['original']['amount']) != ($list_prod->commerce_price[$lang][0]['amount'])) {
-          print '<div class="atpigo">'.t('Atpigo!').'</div>';
+          print '<div class="atpigo">'.t('Akcija!').'</div>';
         }
       }
       $nauja_preke = $node->created;
