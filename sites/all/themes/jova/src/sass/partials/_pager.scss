@@ -1,0 +1,47 @@
+
+ul.pager {
+  position: relative;
+  display: inline-flex;
+  float: right;
+  padding-left: $space * 3;
+  
+  .pager-current {
+    background: #fafafa;   
+    font-size: 13px;
+    line-height: 18px;
+    margin-right: 1px;
+    display: inline-block;
+    padding: 9px 15px;
+    border: 1px solid #e1e1e1;
+  }
+
+  .pager-previous {
+    margin-right: $space;
+  }
+
+  .pager-next {
+    margin-left: $space;
+  }
+
+  a {
+    background: #fff;
+    font-size: 13px;
+    line-height: 18px;
+    margin-right: 1px;
+    display: inline-block;
+    padding: 9px 15px;
+    border: 1px solid #e1e1e1;
+    color: #656565;
+    &:hover{background:$spray;color:#fff}
+  }
+
+  .ajax-progress {
+    position: absolute;
+    left: 0;
+    top: $space;
+  }
+
+  .pager-ellipsis {
+    display: none!important;
+  }
+}

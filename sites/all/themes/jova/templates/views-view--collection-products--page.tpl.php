@@ -93,9 +93,7 @@
 
   <?php if ($rows): ?>
   <div class="products-container">
-    <?php print $rows;
-		//echo '<script> product_boxes("code") </script>';
-		?>
+    <?php print $rows; ?>
   </div>
   <?php elseif ($empty): ?>
   <div class="view-empty">
@@ -104,29 +102,29 @@
   <?php endif; ?>
 
   <?php if ($pager): ?>
-  <?php print $pager; ?>
+    <?php print $pager; ?>
   <?php endif; ?>
 
   <?php if ($attachment_after): ?>
-  <div class="attachment attachment-after">
-    <?php print $attachment_after; ?>
-  </div>
+    <div class="attachment attachment-after">
+      <?php print $attachment_after; ?>
+    </div>
   <?php endif; ?>
 
   <?php if ($more): ?>
-  <?php print $more; ?>
+    <?php print $more; ?>
   <?php endif; ?>
 
   <?php if ($footer): ?>
-  <div class="view-footer">
-    <?php print $footer; ?>
-  </div>
+    <div class="view-footer">
+      <?php print $footer; ?>
+    </div>
   <?php endif; ?>
 
   <?php if ($feed_icon): ?>
-  <div class="feed-icon">
-    <?php print $feed_icon; ?>
-  </div>
+    <div class="feed-icon">
+      <?php print $feed_icon; ?>
+    </div>
   <?php endif; ?>
 
 </div><?php /* class view */ ?>

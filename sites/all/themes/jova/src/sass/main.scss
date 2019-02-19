@@ -8,6 +8,7 @@
 @import 'partials/preloader';
 @import 'partials/cats-menu';
 @import 'partials/carousele';
+@import 'partials/pager';
 @import 'partials/footer';
 
 @import 'shop/product';
@@ -522,36 +523,7 @@ legend{
     }
     .form-submit{margin-top:15px}
 }
-ul.pager{
-    display: inline-block;
-    width: 100%;
-    text-align: right;
-    li{
-        display: inline-block;
-        &.first{display:none}
-        &.last{display:none}
-        &.pager-current{
-            background: #fafafa;   
-            font-size: 13px;
-            line-height: 18px;
-            margin-right: 1px;
-            display: inline-block;
-            padding: 9px 15px;
-            border: 1px solid #e1e1e1;
-        }
-    }
-    a{
-        background: #fff;
-        font-size: 13px;
-        line-height: 18px;
-        margin-right: 1px;
-        display: inline-block;
-        padding: 9px 15px;
-        border: 1px solid #e1e1e1;
-        color: #656565;
-        &:hover{background:$spray;color:#fff}
-    }
-}
+
 .filters{
     display: inline-block;
     float: left;
