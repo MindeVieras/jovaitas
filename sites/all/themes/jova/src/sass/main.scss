@@ -108,7 +108,10 @@ legend{
 
 .field-type-commerce-product-reference{.field-label{display:none}}
 
-.g-recaptcha {
+#google_recaptcha_user_register_form,
+#google_recaptcha_user_login,
+#google_recaptcha_user_pass,
+#google_recaptcha_contact_site_form {
   margin: $space * 3 0;
 }
 
