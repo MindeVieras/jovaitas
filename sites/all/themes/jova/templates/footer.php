@@ -33,26 +33,19 @@
        }
       ?>
 
-      <div class="column">
-        <h4><?php print t('Paskyra'); ?></h4>
-        <ul class="footer-nav-list">
-          <?php if ($user->uid) {?>
-            <?php
-              $userAlias = drupal_get_path_alias('user/'.$userId);
-            //print('<pre>');print_r($user_links);print('</pre>');
-            ?>
-
-            <li><?php print l('Paskyra', $userAlias, array('html'=>true)); ?></li>
-            <li><?php print l('Užsakymai', 'user/'.$userId.'/orders', array('html'=>true)); ?></li>
-            <li><?php print l('Mano adresai', 'user/'.$userId.'/addressbook/shipping', array('html'=>true)); ?></li>
-            <li><a href="<?php print $base_path . 'user/logout/'; ?>">Atsijungti</a></li>
-
-          <?php } else { ?>
-            <li><?php print l('Prisijungti', '/user', array('html'=>true)); ?></li>
-            <li><?php print l('Registracija', '/user/register', array('html'=>true)); ?></li>
-          <?php } ?>
-        </ul>
-      </div>
+      <?php
+       $footer_nav = menu_tree_all_data('menu-footer-information');
+       foreach ($footer_nav as $head_link) {
+          print '<div class="column">';
+          print '<h4>'.$head_link['link']['link_title'].'</h4>';
+          print '<ul class="footer-nav-list">';
+          foreach ($head_link['below'] as $link) {
+            $foot_link_alias = drupal_get_path_alias($link['link']['link_path']);
+            print '<li>'.l($link['link']['link_title'], $foot_link_alias).'</li>';
+          }
+          print '</ul></div>';
+       }
+      ?>
 
       <div class="column">
         <?php
