@@ -20,14 +20,6 @@ function is_shop_admin() {
   return $shop_admin;
 }
 
-/**
- * Implements hook_user_login(). 
- */
-// function jovaitas_user_login(&$edit, $account) {
-// 	$message = variable_get('welcome_message', 'welcome');
-//   	drupal_set_message(check_plain(t($message)));
-// }
-
 
 /**
  * Implements hook_menu().

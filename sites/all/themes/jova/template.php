@@ -100,6 +100,7 @@ function jova_menu_link($variables) {
     if ($element['#below']) {
       $arrow_icon = '<div class="expand-icon"><i class="fa fa-chevron-right"></i></div>';
     }
+
     $output = '<span class="cat-link">' . $menu_link . $arrow_icon . '</span>';
 
   }
