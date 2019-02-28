@@ -491,38 +491,6 @@ legend{
         transition: all 0.3s ease-out;
     }
 }
-.grazinimai{
-    position: relative;
-    
-    .info-text{
-      position: absolute;
-      top: 80px;
-      right: 25px;
-      width: 320px;
-      font-size: 24px;
-      line-height: 36px;
-
-      h3 {
-        color: #151515;
-        font-size: 18px;
-      }
-
-      @include mq(slg){top:100px;right:0px;width:290px}
-      @include mq(xs){
-        position: static;
-        margin-top: 50px;
-        margin-bottom: 25px;
-      }
-    }
-    .form-item{
-        &.webform-component--vardas{width:50%;@include mq(xs){width:100%}}
-        &.webform-component--pavarde{width:50%;@include mq(xs){width:100%}}
-        &.webform-component--email{width:50%;@include mq(xs){width:100%}}
-        &.webform-component--telefonas{width:50%;@include mq(xs){width:100%}}
-        &.webform-component--uzsakymo-id{width:50%;@include mq(xs){width:100%}}
-    }
-    .form-submit{margin-top:15px}
-}
 
 .filters{
     display: inline-block;
