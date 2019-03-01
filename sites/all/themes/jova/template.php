@@ -153,3 +153,25 @@ function jova_form_alter(&$form, &$form_state, $form_id) {
 
   return $form;
 }
+
+/**
+ * Implements hook_preprocess_views_view().
+ *
+ * Add collection term as view header.
+ */
+function jova_preprocess_views_view(&$vars) {
+  $view = $vars['view'];
+  if ($view->name == 'collection_products') {
+    if ($view->current_display == 'page') {
+      // Keep the previous theming.
+      $vars['classes_array'][] = 'view-collection-taxonomy-term';
+      $tid = $view->args['0'];
+      $term = taxonomy_term_load($tid);
+      $vars['collection_title'] = $term->name;
+      $vars['collection_image_url'] = NULL;
+      if (!empty($term->field_image) && !empty($term->field_image[LANGUAGE_NONE][0]['uri'])) {
+        $vars['collection_image_url'] = file_create_url($term->field_image[LANGUAGE_NONE][0]['uri']);
+      }
+    }
+  }
+}
