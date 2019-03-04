@@ -36,9 +36,11 @@ Drupal.behaviors.CToolsAutoSubmit = {
   attach: function(context) {
     // 'this' references the form element
     function triggerSubmit (e) {
-      var $this = $(this);
-      if (!$this.hasClass('ctools-ajaxing')) {
-        $this.find('.ctools-auto-submit-click').click();
+      if ($.contains(document.body, this)) {
+        var $this = $(this);
+        if (!$this.hasClass('ctools-ajaxing')) {
+          $this.find('.ctools-auto-submit-click').click();
+        }
       }
     }
 
@@ -86,12 +88,12 @@ Drupal.behaviors.CToolsAutoSubmit = {
           })
           .keyup(function(e) {
             if ($.inArray(e.keyCode, discardKeyCode) === -1) {
-              timeoutID = setTimeout($.proxy(triggerSubmit, this.form), 1000);
+              timeoutID = setTimeout($.proxy(triggerSubmit, this.form), 500);
             }
           })
           .bind('change', function (e) {
             if ($.inArray(e.keyCode, discardKeyCode) === -1) {
-              timeoutID = setTimeout($.proxy(triggerSubmit, this.form), 1000);
+              timeoutID = setTimeout($.proxy(triggerSubmit, this.form), 500);
             }
           });
       });
