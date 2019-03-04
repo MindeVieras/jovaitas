@@ -1,28 +1,37 @@
-
-<div class="prod-block">
-
 <?php
-  if (isset($node->field_product['und'])){
-      $list_prod_node = $node->field_product['und'][0]['product_id'];
-  }
-  if (isset($node->field_product[0])){
-      $list_prod_node = $node->field_product[0]['product_id'];
-  }
 
-  $list_prod = commerce_product_load($list_prod_node);
-  $lang = $list_prod->language;
-  $img_uri = $list_prod->field_images[$lang][0]['uri'];
-  $img = image_style_url('large', $img_uri);
-  $prod_list_link = drupal_get_path_alias('node/'.$node->nid);
+if (isset($node->field_product['und'])){
+  $list_prod_node = $node->field_product['und'][0]['product_id'];
+}
+if (isset($node->field_product[0])){
+  $list_prod_node = $node->field_product[0]['product_id'];
+}
+
+$list_prod = commerce_product_load($list_prod_node);
+$lang = $list_prod->language;
+$img_uri = $list_prod->field_images[$lang][0]['uri'];
+$img = image_style_url('large', $img_uri);
+$prod_list_link = drupal_get_path_alias('node/'.$node->nid);
+
+$atpigo = false;
+$atpigoClass = '';
+if (isset($list_prod->commerce_price[$lang][0]['original'])){
+  if (($list_prod->commerce_price[$lang][0]['original']['amount']) != ($list_prod->commerce_price[$lang][0]['amount'])) {
+    $atpigo = true;
+    $atpigoClass = ' atpigo';
+  }
+}
+
 ?>
+
+<div class="prod-block<?php echo $atpigoClass; ?>">
 
   <div class="image" style="background-image:url(<?php print $img;?>)">
   	<?php
-      if (isset($list_prod->commerce_price[$lang][0]['original'])){
-        if (($list_prod->commerce_price[$lang][0]['original']['amount']) != ($list_prod->commerce_price[$lang][0]['amount'])) {
-          print '<div class="atpigo">'.t('Akcija').'</div>';
-        }
+      if ($atpigo){
+        print '<div class="atpigo">'.t('Akcija').'</div>';
       }
+
       $nauja_preke = $node->created;
       if ((time()-(6*24*60*60)) < $nauja_preke){
         print '<div class="nauja">Nauja!</div>';

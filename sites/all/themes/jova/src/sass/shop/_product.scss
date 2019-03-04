@@ -177,6 +177,14 @@
       letter-spacing: 1px;
       @include mq(slg){margin-right:0;text-align:left}
   }
+
+  &.atpigo {
+
+    .price {
+      color: $md-red-400;
+    }
+  }
+
   .ajax-progress-throbber {display: none!important}
 }
 
