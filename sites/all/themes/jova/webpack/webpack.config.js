@@ -127,7 +127,7 @@ module.exports = {
         port: 4000,
         logLevel: 'silent',
         files: ['./*.php'],
-        proxy: 'http://local.jovaitas.com/'
+        proxy: 'http://local.jovaitas.com:5000/'
       }),
   ].filter(Boolean),
 }
