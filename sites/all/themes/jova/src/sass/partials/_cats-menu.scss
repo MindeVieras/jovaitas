@@ -25,6 +25,14 @@
       a {
         flex: 1;
         padding: $space * 1.5 $space * 2;
+
+        &.bold {
+          font-weight: 600;
+        }
+
+        &.red {
+          color: $md-red-500;
+        }
       }
 
       .expand-icon {
