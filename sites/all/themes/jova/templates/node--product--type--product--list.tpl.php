@@ -20,7 +20,7 @@
   	<?php
       if (isset($list_prod->commerce_price[$lang][0]['original'])){
         if (($list_prod->commerce_price[$lang][0]['original']['amount']) != ($list_prod->commerce_price[$lang][0]['amount'])) {
-          print '<div class="atpigo">'.t('Akcija!').'</div>';
+          print '<div class="atpigo">'.t('Akcija').'</div>';
         }
       }
       $nauja_preke = $node->created;
@@ -28,10 +28,6 @@
         print '<div class="nauja">Nauja!</div>';
       }
       print l('', $prod_list_link, array('attributes' => array('class' => array('prod-list-img')), 'html' => true));
-      print '<div class="extra-buttons">';
-  	  print '<a href="/" class="comare"><i class="fa fa-random"></i></a>';
-  	  print '<a href="/" class="wishlist"><i class="fa fa-heart"></i></a>';
-      print '</div>';
 
   	?>
   </div>
