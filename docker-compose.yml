@@ -1,24 +1,62 @@
-version: '3.7'
+version: '3'
 
 services:
-
   web:
     container_name: jovaitas_web
     build: docker
-    ports:
-      - 5000:80
     volumes:
-      - .:/var/www:delegated
+      - .:/var/www:cached
     links :
-      - db:drupal_db
+      - db:jovaitas_db
     depends_on:
       - db
+    labels:
+      - 'traefik.backend=jovaitas_web'
+      - 'traefik.port=80'
+      - 'traefik.frontend.rule=Host:e.jovaitas.lt'
 
   db:
     container_name: jovaitas_db
-    image: mysql:5.5
+    image: mysql:5.6
     ports:
       - 3307:3306
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=drupal
       - MYSQL_ROOT_PASSWORD=root
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: "jovaitas_pma"
+    environment:
+      PMA_HOST: jovaitas_db
+      PMA_USER: root
+      PMA_PASSWORD: root
+      PHP_UPLOAD_MAX_FILESIZE: 1G
+      PHP_MAX_INPUT_VARS: 1G
+    labels:
+      - 'traefik.backend=jovaitas_pma'
+      - 'traefik.port=80'
+      - 'traefik.frontend.rule=Host:pma.e.jovaitas.lt.localhost'
+
+  portainer:
+    image: portainer/portainer
+    container_name: "jovaitas_portainer"
+    command: --no-auth -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - 'traefik.backend=jovaitas_portainer'
+      - 'traefik.port=9000'
+      - 'traefik.frontend.rule=Host:portainer.e.jovaitas.lt.localhost'
+
+  traefik:
+    image: traefik
+    container_name: "jovaitas_traefik"
+    command: -c /dev/null --web --docker --logLevel=INFO
+    ports:
+      - '8000:80'
+#      - '8080:8080' # Dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

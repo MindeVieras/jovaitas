@@ -149,6 +149,6 @@ DirectoryIndex index.php index.html index.htm
 </IfModule>
 
 #AP** redirect to https
-RewriteCond %{HTTP_HOST} e\.jovaitas\.lt [NC]
-RewriteCond %{SERVER_PORT} 80
-RewriteRule ^(.*)$ https://e.jovaitas.lt/$1 [R,L]
+#RewriteCond %{HTTP_HOST} e\.jovaitas\.lt [NC]
+#RewriteCond %{SERVER_PORT} 80
+#RewriteRule ^(.*)$ https://e.jovaitas.lt/$1 [R,L]

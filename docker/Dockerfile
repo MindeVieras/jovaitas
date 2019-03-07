@@ -23,13 +23,13 @@ ENV PATH /root/.composer/vendor/bin:$PATH
 RUN composer global require "drush/drush:8.*"
 
 # Copy apache config file
-COPY apache/local.jovaitas.com.conf /etc/apache2/sites-available/
+COPY apache/e.jovaitas.lt.conf /etc/apache2/sites-available/
 
 # Enable apache modules
 RUN a2enmod rewrite
 
 # Enable the site
-RUN a2ensite local.jovaitas.com
+RUN a2ensite e.jovaitas.lt
 
 # Set the working directory
 WORKDIR /var/www
