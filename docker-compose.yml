@@ -17,7 +17,7 @@ services:
 
   db:
     container_name: jovaitas_db
-    image: mysql:5.6
+    image: mariadb:10.3.13-bionic
     ports:
       - 3307:3306
     volumes:
