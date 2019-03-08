@@ -88,7 +88,7 @@ function admin_settings_form($form, &$form_state) {
     '#type' => 'textfield',
     '#title' => t('Siuntimas'),
     '#required' => false,
-    '#default_value' => variable_get('siuntimas', 'Nuo 100eur nemokamas.'),
+    '#default_value' => variable_get('siuntimas', 'Nuo 70eur nemokamas.'),
   );
 
   $form['grazinimai'] = array(
