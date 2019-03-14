@@ -75,51 +75,42 @@ function commerce_paysera_wps_settings_form($settings = NULL) {
 /**
  * Payment method callback: adds a message to the submission form.
  */
-function commerce_paysera_wps_submit_form($payment_method, $pane_values, $checkout_pane, $order)
-{
-    global $language;
+function commerce_paysera_wps_submit_form($payment_method, $pane_values, $checkout_pane, $order) {
+  global $language;
 
-    if ($payment_method['settings']['showPaymentMethods'] == 1) {
-        $pmethods = WebToPay::getPaymentMethodList($payment_method['settings']['projectId'])->setDefaultLanguage($language->language)->getCountries();
+  if ($payment_method['settings']['showPaymentMethods'] == 1) {
 
-        foreach($pmethods as $pmethod){
-            $countries[$pmethod->getCode()] = $pmethod->getTitle();
-        }
+    $pmethods = WebToPay::getPaymentMethodList($payment_method['settings']['projectId'])->setDefaultLanguage($language->language)->getCountries();
 
-        $form['countries_select'] = array(
-            '#title' => t('Choose your country'),
-            '#type' => 'select',
-            '#options' => $countries,
+    $groups = $pmethods[$language->language]->getGroups();
+
+    foreach ($groups as $group) {
+
+      $group_payment_metods = $group->getPaymentMethods();
+      // var_dump($group_payment_metods);
+      foreach($group_payment_metods as $paymentMethod) {
+        $options[$paymentMethod->getKey()] = t($group->getPaymentMethod($paymentMethod->getKey())->getTitle());
+        // $images[$country->getCode()][$paymentMethod->getKey()] = '<img ="'.$paymentMethod->getLogoUrl().'" />"';
+        
+        $form[$language->language] = array(
+          '#prefix' => '<div id="pmc-'.$language->language.'" class="payment-countries">',
+          '#suffix' => '</div>',
+          $group->getKey() => array(
+            '#type' => 'radios',
+            '#options' => $options,
+          ),
         );
 
-        foreach ($pmethods as $country) {
-            foreach ($country->getGroups() as $group) {
-                foreach($group->getPaymentMethods() as $paymentMethod){
-                    $options[$country->getCode()][$paymentMethod->getKey()] = t($group->getPaymentMethod($paymentMethod->getKey())->getTitle());
-                    $images[$country->getCode()][$paymentMethod->getKey()] = '<img ="'.$paymentMethod->getLogoUrl().'" />"';
-                }
-            }
-        }
-
-        foreach ($pmethods as $country) {
-            foreach ($country->getGroups() as $group) {
-                foreach($group->getPaymentMethods() as $paymentMethod){
-                    $form[$country->getCode()] = array(
-                        '#prefix' => '<div id="pmc-'.$country->getCode().'" class="payment-countries" style="display: none;">',
-                        '#suffix' => '</div>',
-                        $group->getKey() => array(
-                            '#type' => 'radios',
-                            '#options' => $options[$country->getCode()],
-                        ),
-                    );
-                }
-            }
-        }
-
-        $form['#attached']['js'][] = drupal_get_path('module', 'commerce_paysera') . '/js/paysera.js';
-
-        return $form;
+      }
     }
+
+    // var_dump($options);
+
+
+    // $form['#attached']['js'][] = drupal_get_path('module', 'commerce_paysera') . '/js/paysera.js';
+
+    return $form;
+  }
 }
 
 function commerce_paysera_wps_submit_form_validate($payment_method, $pane_form, $pane_values, $order, $form_parents = array()){
@@ -127,21 +118,22 @@ function commerce_paysera_wps_submit_form_validate($payment_method, $pane_form, 
 }
 
 function commerce_paysera_wps_submit_form_submit($payment_method, $pane_form, $pane_values, $order, $form_parents = array()){
-    foreach($pane_values as $key => $val){
-        if(!empty($val['other'])){
-            $paymethod = $val['other'];
-        }
+
+  foreach($pane_values as $key => $val){
+    if(!empty($val['other'])){
+        $paymethod = $val['other'];
     }
+  }
 
-    $transaction = commerce_payment_transaction_new('paysera_wps', $order->order_id);
+  $transaction = commerce_payment_transaction_new('paysera_wps', $order->order_id);
 
-    if(!empty($paymethod)){
-        $transaction->data['payment'] = $paymethod;
-    }else{
-        $transaction->data['payment'] = '';
-    }
+  if(!empty($paymethod)){
+    $transaction->data['payment'] = $paymethod;
+  }else{
+    $transaction->data['payment'] = '';
+  }
 
-    commerce_payment_transaction_save($transaction);
+  commerce_payment_transaction_save($transaction);
 }
 
 /**
@@ -196,50 +188,51 @@ function commerce_paysera_wps_order_form($form, &$form_state, $order, $settings)
     $lng = array('lt'=>'LIT', 'lv'=>'LAV', 'ee'=>'EST', 'es'=>'EST', 'ru'=>'RUS', 'de'=>'GER', 'pl'=>'POL');
 
     $dtd = array(
-        'projectid'     => $settings['projectId'],
-        'sign_password' => $settings['projectPass'],
-        'orderid'       => $order->order_id,
-        'amount'        => $Order->commerce_order_total->amount->value(),
+      'projectid'     => $settings['projectId'],
+      'sign_password' => $settings['projectPass'],
+      'orderid'       => $order->order_id,
+      'amount'        => $Order->commerce_order_total->amount->value(),
 
-        'currency'      => $Order->commerce_order_total->currency_code->value(),
+      'currency'      => $Order->commerce_order_total->currency_code->value(),
 
-        'accepturl'     => url('checkout/' . $order->order_id . '/payment/return/' . $order->data['payment_redirect_key'], array('absolute' => TRUE)),
-        'cancelurl'     => url('checkout/' . $order->order_id . '/payment/back/' . $order->data['payment_redirect_key'], array('absolute' => TRUE)),
-        'callbackurl'   => url('commerce_paysera/ipn/' . $settings['method_id'] . '|commerce_payment_paysera_wps', array('absolute' => TRUE)),
+      'accepturl'     => url('checkout/' . $order->order_id . '/payment/return/' . $order->data['payment_redirect_key'], array('absolute' => TRUE)),
+      'cancelurl'     => url('checkout/' . $order->order_id . '/payment/back/' . $order->data['payment_redirect_key'], array('absolute' => TRUE)),
+      'callbackurl'   => url('commerce_paysera/ipn/' . $settings['method_id'] . '|commerce_payment_paysera_wps', array('absolute' => TRUE)),
 
-        'country'       => $billing['country'],
-        'p_firstname'   => $names['firstname'],
-        'p_lastname'    => $names['lastname'],
-        'p_email'       => $order->mail,
-        'lang'          => (isset($lng[$language->language])?$lng[$language->language]:'ENG'),
-        'p_street'      => $billing['thoroughfare'],
-        'p_city'        => $billing['locality'],
-        'p_zip'         => $billing['postal_code'],
-        'p_countrycode' => $billing['country'],
-        'test'          => $settings['testMode'],
-        'payment'       => (isset($payment->data['payment'])?$payment->data['payment']:''),
-        'system'        => 'Drupal7',
-        'component'     => 'Commerce 1.9',
-
+      'country'       => $billing['country'],
+      'p_firstname'   => $names['firstname'],
+      'p_lastname'    => $names['lastname'],
+      'p_email'       => $order->mail,
+      'lang'          => (isset($lng[$language->language])?$lng[$language->language]:'ENG'),
+      'p_street'      => $billing['thoroughfare'],
+      'p_city'        => $billing['locality'],
+      'p_zip'         => $billing['postal_code'],
+      'p_countrycode' => $billing['country'],
+      'test'          => $settings['testMode'],
+      'payment'       => (isset($payment->data['payment'])?$payment->data['payment']:''),
+      'system'        => 'Drupal7',
+      'component'     => 'Commerce 1.9',
     );
 
     try {
-        $request = WebToPay::buildRequest($dtd);
+      $request = WebToPay::buildRequest($dtd);
     } catch (WebToPayException $e) {
-        echo get_class($e) . ': ' . $e->getMessage();
+      echo get_class($e) . ': ' . $e->getMessage();
     }
 
     $form['#action'] = WebToPay::getPaymentUrl(strtoupper($language->language));
 
     foreach ($request as $name => $value) {
-        $form[$name] = array('#type' => 'hidden', '#value' => $value);
+      $form[$name] = array('#type' => 'hidden', '#value' => $value);
     }
 
     $form['submit'] = array(
-        '#type'  => 'submit',
-        '#value' => t('Proceed to Paysera'),
+      '#type'  => 'submit',
+      '#value' => t('Proceed to Paysera'),
     );
 
+    // var_dump($dtd);
+    // die();
     return $form;
 }
 

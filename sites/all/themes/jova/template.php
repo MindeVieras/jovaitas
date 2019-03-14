@@ -124,6 +124,7 @@ function jova_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'commerce_checkout_form_checkout') {
+    // var_dump($form);
     $form['buttons']['cancel']['#prefix'] = '<span class="button-operator">'.t('arba').'</span>';
   }
   if ($form_id == 'commerce_checkout_form_shipping') {
