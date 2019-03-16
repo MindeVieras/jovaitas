@@ -123,3 +123,58 @@ table.checkout-review>tbody>tr>td{
 
 	display: none!important;
 }
+
+#commerce-checkout-form-checkout {
+
+	legend {
+		margin-top: $space * 2;
+	}
+}
+
+#edit-commerce-payment-payment-method {
+	// display: flex;
+	// align-items: center;
+
+	.form-item {
+
+		img {
+			width: $space * 20;
+		}
+	}
+}
+
+#payment-details {
+	
+	h3 {
+		padding-top: $space / 2;
+		padding-bottom: $space * 1.5;
+		font-size: 22px;
+	}
+
+	.form-radios {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.payment-method {
+		display: inline-block;
+		margin-right: $space;
+		margin-bottom: $space * 2;
+		padding: $space / 2;
+		border: 1px solid $md-grey-700;
+		text-align: center;
+		cursor: pointer;
+
+		p {
+			margin-top: $space / 2;
+			margin-bottom: 0!important;
+			font-size: 12px;
+			line-height: 1.25;
+		}
+	}
+
+	img {
+		display: block;
+		width: auto;
+	}
+}

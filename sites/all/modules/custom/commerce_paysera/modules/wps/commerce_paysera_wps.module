@@ -9,7 +9,7 @@ function commerce_paysera_wps_commerce_payment_method_info() {
     $payment_methods = array();
     $icons           = commerce_paysera_icons();
 
-    $display_title = t('!logo Pay via Paysera.com payment collection service', array('!logo' => $icons[$language->language]));
+    $display_title = t('!logo', array('!logo' => $icons[$language->language]));
 
     $payment_methods['paysera_wps'] = array(
         'base'                 => 'commerce_paysera_wps',
@@ -59,16 +59,6 @@ function commerce_paysera_wps_settings_form($settings = NULL) {
         '#default_value' => $settings['testMode'],
     );
 
-    $form['showPaymentMethods'] = array(
-        '#type'          => 'radios',
-        '#title'         => t('Show payment methods?'),
-        '#options'       => array(
-            '0' => ('No'),
-            '1' => ('Yes'),
-        ),
-        '#default_value' => $settings['showPaymentMethods'],
-    );
-
     return $form;
 }
 
@@ -78,39 +68,62 @@ function commerce_paysera_wps_settings_form($settings = NULL) {
 function commerce_paysera_wps_submit_form($payment_method, $pane_values, $checkout_pane, $order) {
   global $language;
 
-  if ($payment_method['settings']['showPaymentMethods'] == 1) {
+  $lng_code = $language->language;
+  $pid = $payment_method['settings']['projectId'];
 
-    $pmethods = WebToPay::getPaymentMethodList($payment_method['settings']['projectId'])->setDefaultLanguage($language->language)->getCountries();
+  $payment_method_list = WebToPay::getPaymentMethodList($pid)->setDefaultLanguage($lng_code);
+  $payment_countries = $payment_method_list->getCountries();
+  
+  // Accept payments only from Lithuania,
+  $groups = $payment_countries['lt']->getGroups();
+  $payment_methods = $payment_countries['lt']->getPaymentMethods();
 
-    $groups = $pmethods[$language->language]->getGroups();
-
-    foreach ($groups as $group) {
-
-      $group_payment_metods = $group->getPaymentMethods();
-      // var_dump($group_payment_metods);
-      foreach($group_payment_metods as $paymentMethod) {
-        $options[$paymentMethod->getKey()] = t($group->getPaymentMethod($paymentMethod->getKey())->getTitle());
-        // $images[$country->getCode()][$paymentMethod->getKey()] = '<img ="'.$paymentMethod->getLogoUrl().'" />"';
-        
-        $form[$language->language] = array(
-          '#prefix' => '<div id="pmc-'.$language->language.'" class="payment-countries">',
-          '#suffix' => '</div>',
-          $group->getKey() => array(
-            '#type' => 'radios',
-            '#options' => $options,
-          ),
-        );
-
-      }
-    }
-
-    // var_dump($options);
-
-
-    // $form['#attached']['js'][] = drupal_get_path('module', 'commerce_paysera') . '/js/paysera.js';
-
-    return $form;
+  // Make payment method options for hidden select field.
+  $payment_options = [];
+  $payment_options[0] = t('-Pasirinkite-');
+  foreach ($payment_methods as $key => $method) {
+    $payment_options[$key] = $method->getTitle();
   }
+
+  // Hidden payment methods select list.
+  $form[$lng_code] = [
+    '#prefix' => '<div style="display:none">',
+    '#suffix' => '</div>',
+    '#type' => 'select',
+    '#options' => $payment_options,
+    '#default_value' => 0,
+    '#attributes' => [
+      'id' => 'payment_methods_list',
+    ],
+  ];
+
+  foreach ($groups as $group_key => $group) {
+
+    $form[$group_key][] = [
+      '#markup' => '<h3>' . $group->getTitle() . '</h3>',
+    ];
+
+    $group_payment_methods = $group->getPaymentMethods();
+    foreach($group_payment_methods as $paymentMethod) {
+      $payment_key = $paymentMethod->getKey();
+      $payment_method = $group->getPaymentMethod($paymentMethod->getKey());
+      $payment_logo = $payment_method->getLogoUrl();
+
+      $form[$group_key][$payment_key] = array(
+        '#prefix' => '<div class="payment-method" data-payment="' . $payment_key . '"><img src="'.$payment_logo.'" />',
+        '#suffix' => '</div>',
+        '#markup' => '<p>' . t($payment_method->getTitle()) . '</p>',
+      );
+
+    }
+  }
+
+  // var_dump($options);
+
+
+  // $form['#attached']['js'][] = drupal_get_path('module', 'commerce_paysera') . '/js/paysera.js';
+
+  return $form;
 }
 
 function commerce_paysera_wps_submit_form_validate($payment_method, $pane_form, $pane_values, $order, $form_parents = array()){
@@ -231,8 +244,6 @@ function commerce_paysera_wps_order_form($form, &$form_state, $order, $settings)
       '#value' => t('Proceed to Paysera'),
     );
 
-    // var_dump($dtd);
-    // die();
     return $form;
 }
 
