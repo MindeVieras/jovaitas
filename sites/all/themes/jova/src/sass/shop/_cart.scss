@@ -71,6 +71,7 @@
 		}
 	}
 }
+
 table.commerce-price-formatted-components{
 	width: auto!important;
 	margin-top: 30px;
@@ -102,19 +103,28 @@ table.checkout-review>tbody>tr>td{
 	border: 0px none;
 	text-align: left;
 }
-.checkout-buttons{
+
+.checkout-buttons {
 	text-align: right;	
 	margin-top: 30px;
-	input{
+	
+	input {
 		margin-left: 10px;
 		background: $spray;
 		color: #fff;
 		font-weight: bold;
 		text-transform: none;
-		&:hover{background:#adc02f}
-		&.checkout-continue{margin-right:10px}
+
+		&:hover {
+			background: #adc02f;
+		}
+		
+		&.checkout-continue {
+			margin-right: 10px;
+		}
 	}
 }
+
 //#edit-customer-profile-billing{display:none}
 #customer-profile-billing-ajax-wrapper{display:none}
 .form-item-customer-profile-shipping-addressbook{display:none}
@@ -141,6 +151,10 @@ table.checkout-review>tbody>tr>td{
 			width: $space * 20;
 		}
 	}
+}
+
+#edit-cart-contents {
+	margin-top: $space * 4;
 }
 
 #payment-details {
