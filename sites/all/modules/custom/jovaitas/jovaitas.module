@@ -36,3 +36,38 @@ function jovaitas_form_alter(&$form, &$form_state, $form_id) {
     $form['customer_profile_billing']['commerce_customer_address']['und'][0]['locality_block']['administrative_area']['#required'] = true;
   }
 }
+
+/**
+ * Implements hook_commerce_price_formatted_components_alter().
+ */
+function jovaitas_commerce_price_formatted_components_alter(&$components, $price, $entity) {
+
+  // Change cart/checkout formatted components
+  if (is_array($components)) {
+
+    $discount = 0;
+
+    foreach ($components as $key => $component) {
+      if (is_int($key)) {
+        // Add all discounts to one
+        $discount += $component['price']['amount'];
+        // Remove unwanted components
+        unset($components[$key]);
+      }
+    }
+
+    // Set single discount component
+    if ($discount < 0) {
+      // Set new discount component
+      $components['discount'] = [
+        'title' => t('Nuolaida'),
+        'price' => [
+          'amount' => $discount,
+          'currency_code' => $price['currency_code'],
+          'data' => [],
+        ],
+        'weight' => null,
+      ];
+    }
+  }
+}
