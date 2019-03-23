@@ -5,10 +5,14 @@
  * Module file for Jovaitas Module
  */
 
-
 // Include all admin settings form
 module_load_include('inc', 'jovaitas', 'includes/admin.settings');
 
+/**
+ * Checks if user is admin.
+ * 
+ * @return bool
+ */
 function is_shop_admin() {
   
   global $user;
@@ -22,53 +26,13 @@ function is_shop_admin() {
 
 
 /**
- * Implements hook_menu().
+ * Implements hook_form_alter().
  */
-// function jovaitas_menu() {
-  // $items['grazinimai'] = array(
-  //   'title' => t('Grąžinimai'),
-  //   'page callback' => 'drupal_get_form',
-  //   'page arguments' => array('grazinimai_form'),
-  //   'access callback' => TRUE,
-  //   'weight'=> 1,
-  //   'type'=> MENU_NORMAL_ITEM,
-  // );
-//   return $items;
-// }
+function jovaitas_form_alter(&$form, &$form_state, $form_id) {
 
-// function grazinimai_form($form, &$form_submit) {
-//   $form['firstname'] = array(
-//     '#title' => t('First Name'),
-//     '#type' => 'textfield',
-//     //'#required' => TRUE,
-//   );
-//   $form['lastname'] = array(
-//     '#title' => t('Client Name'),
-//     '#type' => 'textfield',
-//     //'#required' => TRUE,
-//   );
-//   $form['submit'] = array(
-//     '#value' => 'Test',
-//     '#type' => 'submit',
-//   );
-//   return $form;
-// }
-
-// function grazinimai_form_form_submit($form_id, &$form_state) {
-
-// }
-
-// function jovaitas_commerce_line_item_type_info() {
-//   $line_item_types = array();
- 
-//   $line_item_types['naujausias'] = array(
-//     'type' => 'naujausias', 
-//     'name' => t('Naujausias'), 
-//     'description' => t('Nuajausiu prekiu isdestymas.'), 
-//     'product' => TRUE, 
-//     'add_form_submit_value' => t('Add product'), 
-//     'base' => 'commerce_product_line_item',
-//   );
- 
-//   return $line_item_types;
-// }
+  // Alter checkout form.
+  if ($form_id == 'commerce_checkout_form_checkout') {
+    // Make Phone number required.
+    $form['customer_profile_billing']['commerce_customer_address']['und'][0]['locality_block']['administrative_area']['#required'] = true;
+  }
+}
