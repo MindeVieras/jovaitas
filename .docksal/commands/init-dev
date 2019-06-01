@@ -8,19 +8,10 @@ fin drush rr
 fin drush en dblog -y
 fin drush en simpletest -y
 fin drush dis google_recaptcha -y
-# fin drush dis toolbar -y
-# Keep modules we don't want to commit in sites/default/modules
-# chmod u+w sites/default
-# fin drush dl admin_menu --destination=sites/default/modules -y
-# fin drush en admin_menu_toolbar -y
 
 # Variables
 fin drush vset preprocess_css 0 -y
 fin drush vset preprocess_js 0 -y
-
-# Reset admin password
-# fin drush upwd admin --password="pass"
-# echo "Password: pass"
 
 # Always remember to flush
 fin drush cc all
