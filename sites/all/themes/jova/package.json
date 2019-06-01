@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/MindeVieras/jovaitas#README",
   "dependencies": {
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",
     "magnific-popup": "^1.1.0",
     "slick-carousel": "^1.8.1",
@@ -31,7 +31,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.4.0",
-    "browser-sync": "^2.18.8",
+    "browser-sync": "^2.26.5",
     "browser-sync-webpack-plugin": "^1.1.4",
     "clean-webpack-plugin": "^0.1.19",
     "cross-env": "^5.2.0",

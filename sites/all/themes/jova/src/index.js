@@ -24,7 +24,7 @@ window.onload = function (){
 }
 
 $(document).ready(() => {
-  
+
   // Set carousels
   const carousel = new Carousel()
   carousel.productCarousel('#product_carousel')
@@ -33,13 +33,13 @@ $(document).ready(() => {
 
   // Categories Sidebar Menu
   const catsSidebar = $('#categories_sidebar')
-  
+
   // Set active menu open
   catsSidebar.find('.active-trail').addClass('open')
 
   // Categories menu expand
   catsSidebar.find('.expand-icon').each((i, el) => {
-    
+
     $(el).click(() => {
       $(el).closest('.expanded').toggleClass('open')
       console.log()
@@ -60,9 +60,9 @@ $(document).ready(() => {
   //     var menuHeight = $(el).find('.side-menu').children('li').length
   //     var toggleHeight = $(el).find('.side-menu').height() == 0 ? 30*menuHeight+'px' : '0px'
   //     $(el).find('.side-menu').animate({ maxHeight: toggleHeight })
-  
+
   //     $(HTMLAudioElement).toggleClass('clicked')
-  
+
   //   })
   // })
 
@@ -120,11 +120,5 @@ function product_boxes(name) {
     }
     count++
   })
-  console.log(name + '- Maxi Height: ' + maxheight)
   $('.prod-block').css({'height': maxheight+'px'})
-  /*$('.prod-block').each(function() {
-    $(this).height(maxheight);
-    console.log("change "+count+" to " + maxheight);
-    count++;
-  });*/
 }
