@@ -24,43 +24,43 @@
  * - $feed_icon: Feed icon to display, if any
  * - $more: A link to view more, if any
  * - $collection_title: The collection term title
- * - $collection_image_url: The collection term image url, if any
+ * - $collection_image_url: The collection term image url, if any.
  *
  * @ingroup views_templates
  */
 ?>
 <div class="<?php print $classes; ?> clearfix">
 
-	<div id="content-top">
+  <div id="content-top">
     <div class="taxonomy-title"><?php print $collection_title; ?></div>
 
     <?php
-      $lemp_tipas_block = module_invoke('facetapi','block_view', 'yBkM5ZZHOT0p1W4HBMtnZL1cd2N228FP');
-      $xenon_tipas_block = module_invoke('facetapi','block_view', 'SNGBYwhKkSB9nDdde0LDrg07bLKTnzHM');
-      $voltazas_block = module_invoke('facetapi','block_view', 'T9t8Jon7Rs1d7YUXCCn4R1WKUyk0eBpC');
+      $lemp_tipas_block = module_invoke('facetapi', 'block_view', 'yBkM5ZZHOT0p1W4HBMtnZL1cd2N228FP');
+      $xenon_tipas_block = module_invoke('facetapi', 'block_view', 'SNGBYwhKkSB9nDdde0LDrg07bLKTnzHM');
+      $voltazas_block = module_invoke('facetapi', 'block_view', 'T9t8Jon7Rs1d7YUXCCn4R1WKUyk0eBpC');
     ?>
 
     <?php
       if (isset($lemp_tipas_block) || isset($xenon_tipas_block)) {
         print '<div class="filters">';
-        print '<div class="filters-label">'.t('Filtruoti').':</div>';
+        print '<div class="filters-label">' . t('Filtruoti:') . '</div>';
 
         if (isset($lemp_tipas_block)) {
-          print '<div data-dropdown="#lemp-tipas-filter" class="btn btn-danger">'.$lemp_tipas_block['subject'].'</div>';
+          print '<div data-dropdown="#lemp-tipas-filter" class="btn btn-danger">' . $lemp_tipas_block['subject'] . '</div>';
           print '<div class="dropdown-menu dropdown-anchor-left-center dropdown-has-anchor dark" id="lemp-tipas-filter">';
           print render($lemp_tipas_block['content']);
           print '</div>';
         }
 
         if (isset($xenon_tipas_block)) {
-          print '<div data-dropdown="#xenon-tipas-filter" class="btn btn-danger">'.$xenon_tipas_block['subject'].'</div>';
+          print '<div data-dropdown="#xenon-tipas-filter" class="btn btn-danger">' . $xenon_tipas_block['subject'] . '</div>';
           print '<div class="dropdown-menu dropdown-anchor-left-center dropdown-has-anchor dark" id="xenon-tipas-filter">';
           print render($xenon_tipas_block['content']);
           print '</div>';
         }
 
         if (isset($voltazas_block)) {
-          print '<div data-dropdown="#voltazas-filter" class="btn btn-danger">'.t('Voltažas').'</div>';
+          print '<div data-dropdown="#voltazas-filter" class="btn btn-danger">' . t('Voltažas') . '</div>';
           print '<div class="dropdown-menu dropdown-anchor-left-center dropdown-has-anchor dark" id="voltazas-filter">';
           print render($voltazas_block['content']);
           print '</div>';
@@ -72,12 +72,12 @@
 
       <div class="active-filters">
         <?php
-              $curr_srch_block = module_invoke('current_search','block_view', 'kickstart_search');
+              $curr_srch_block = module_invoke('current_search', 'block_view', 'kickstart_search');
               print render($curr_srch_block['content']);
         ?>
       </div>
 
-	</div>
+  </div>
 
   <?php if ($exposed): ?>
   <div class="view-filters">
