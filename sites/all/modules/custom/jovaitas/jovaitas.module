@@ -2,19 +2,36 @@
 
 /**
  * @file
- * Module file for Jovaitas Module
+ * Module file for Jovaitas Module.
  */
 
-// Include all admin settings form
-module_load_include('inc', 'jovaitas', 'includes/admin.settings');
+/**
+ * Implements hook_menu().
+ */
+function jovaitas_menu() {
+
+  $items = [];
+
+  $items['admin/config/people/jovaitas'] = [
+    'title' => 'Jovaito admino nustatymai',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['jovaitas_admin_settings_form'],
+    'access arguments' => ['administer users'],
+    'file' => 'includes/jovaitas.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  ];
+
+  return $items;
+}
 
 /**
  * Checks if user is admin.
- * 
+ *
  * @return bool
+ *   Return TRUE is user is administrator, otherwise - FALSE.
  */
 function is_shop_admin() {
-  
+
   global $user;
   $shop_admin = FALSE;
 
@@ -24,7 +41,6 @@ function is_shop_admin() {
   return $shop_admin;
 }
 
-
 /**
  * Implements hook_form_alter().
  */
@@ -33,7 +49,11 @@ function jovaitas_form_alter(&$form, &$form_state, $form_id) {
   // Alter checkout form.
   if ($form_id == 'commerce_checkout_form_checkout') {
     // Make Phone number required.
-    $form['customer_profile_billing']['commerce_customer_address']['und'][0]['locality_block']['administrative_area']['#required'] = true;
+    $form['customer_profile_billing']['commerce_customer_address']['und'][0]['locality_block']['administrative_area']['#required'] = TRUE;
+
+    // Set note for payment 'Grynaisiais'.
+    $note = t('(Tik atsiimant prekes mūsų parduotuvėje, adresu Isladijos pl. 33, Kaunas)');
+    $form['commerce_payment']['payment_method']['#options']['grynaisiais|commerce_payment_grynaisiais'] = t('Grynaisiais') . ' <span class="payment-note">' . $note . '</span>';
   }
 }
 
@@ -42,23 +62,23 @@ function jovaitas_form_alter(&$form, &$form_state, $form_id) {
  */
 function jovaitas_commerce_price_formatted_components_alter(&$components, $price, $entity) {
 
-  // Change cart/checkout formatted components
+  // Change cart/checkout formatted components.
   if (is_array($components)) {
 
     $discount = 0;
 
     foreach ($components as $key => $component) {
       if (is_int($key)) {
-        // Add all discounts to one
+        // Add all discounts to one.
         $discount += $component['price']['amount'];
-        // Remove unwanted components
+        // Remove unwanted components.
         unset($components[$key]);
       }
     }
 
-    // Set single discount component
+    // Set single discount component.
     if ($discount < 0) {
-      // Set new discount component
+      // Set new discount component.
       $components['discount'] = [
         'title' => t('Nuolaida'),
         'price' => [
@@ -66,7 +86,7 @@ function jovaitas_commerce_price_formatted_components_alter(&$components, $price
           'currency_code' => $price['currency_code'],
           'data' => [],
         ],
-        'weight' => null,
+        'weight' => NULL,
       ];
     }
   }
