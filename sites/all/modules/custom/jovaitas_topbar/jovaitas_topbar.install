@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Install, update and uninstall functions for the jovaitas_topbar module.
@@ -6,10 +7,18 @@
 
 /**
  * Implements hook_uninstall().
- *
  */
 function jovaitas_topbar_uninstall() {
+  // Delete top bar block content variable.
+  variable_del('jovaitas_topbar_content');
+}
 
-  // Delete top bar block content variable
-  variable_del('top_bar_content');
+/**
+ * Rename top_bar_content variable to jovaitas_topbar_content.
+ */
+function jovaitas_topbar_update_7000(&$sandbox) {
+  db_update('variable')
+    ->fields(['name' => 'jovaitas_topbar_content'])
+    ->condition('name', 'top_bar_content')
+    ->execute();
 }

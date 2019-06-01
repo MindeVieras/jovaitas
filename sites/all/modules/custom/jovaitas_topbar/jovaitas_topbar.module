@@ -1,16 +1,20 @@
 <?php
 
 /**
+ * @file
+ * Functions for jovaitas_topbar module.
+ */
+
+/**
  * Implements hook_block_info().
- *
  */
 function jovaitas_topbar_block_info() {
 
   $blocks = [];
 
   $blocks['block_top_bar'] = [
-    'info' => 'Jovaitas: Virsutine editinama justa.',
-    'cache' => DRUPAL_NO_CACHE
+    'info' => t('Jovaitas: Viršutinė juosta.'),
+    'cache' => DRUPAL_NO_CACHE,
   ];
 
   return $blocks;
@@ -18,7 +22,6 @@ function jovaitas_topbar_block_info() {
 
 /**
  * Implements hook_block_configure().
- *
  */
 function jovaitas_topbar_block_configure($delta = '') {
 
@@ -28,9 +31,9 @@ function jovaitas_topbar_block_configure($delta = '') {
     case 'block_top_bar':
       $form['top_bar_content'] = [
         '#type' => 'text_format',
-        '#title' => 'Turinys',
-        '#description' => 'Įrašykite viršutinės juostos tekstą.',
-        '#default_value' => variable_get('top_bar_content', 'Viršutines juostos tekstas.'),
+        '#title' => t('Turinys'),
+        '#description' => t('Įrašykite viršutinės juostos tekstą.'),
+        '#default_value' => variable_get('jovaitas_topbar_content', t('Viršutinės juostos tekstas.')),
       ];
       break;
   }
@@ -38,56 +41,54 @@ function jovaitas_topbar_block_configure($delta = '') {
   return $form;
 }
 
-
 /**
  * Implements hook_form_alter().
- *
  */
 function jovaitas_topbar_form_alter(&$form, &$form_state, $form_id) {
 
   switch ($form_id) {
     case 'block_admin_configure':
-      $form['#after_build'][] = 'after_block_form_after_build';
+      $form['#after_build'][] = 'jovaitas_topbar_block_form_after_build';
       break;
   }
 }
 
-// Block Form after_build function
-function after_block_form_after_build($form) {
-  
-  // Remove unwanted form fields
+/**
+ * Block Form after_build function.
+ */
+function jovaitas_topbar_block_form_after_build($form) {
+
+  // Remove unwanted form fields.
   unset($form['settings']['title']);
   unset($form['settings']['top_bar_content']['format']['guidelines']);
   unset($form['regions']);
   unset($form['visibility_title']);
   unset($form['visibility']);
-  
-  // Alter form
-  $form['settings']['top_bar_content']['format']['#attributes'] = array('hidden' => true);
-  $form['actions']['submit']['#value'] = 'Išsaugoti';
-  
+
+  // Alter form.
+  $form['settings']['top_bar_content']['format']['#attributes'] = ['hidden' => TRUE];
+  $form['actions']['submit']['#value'] = t('Išsaugoti');
+
   return $form;
 }
 
 /**
  * Implements hook_block_save().
- *
  */
-function jovaitas_topbar_block_save($delta = '', $edit = array()) {
-  
+function jovaitas_topbar_block_save($delta = '', $edit = []) {
+
   // We need to save settings from the configuration form.
-  // We need to check $delta to make sure we are saving the right block.  
+  // We need to check $delta to make sure we are saving the right block.
   switch ($delta) {
     case 'block_top_bar':
       // Have Drupal save the string to the database.
-      variable_set('top_bar_content', $edit['top_bar_content']['value']);
+      variable_set('jovaitas_topbar_content', $edit['top_bar_content']['value']);
       break;
   }
 }
 
 /**
  * Implements hook_block_view().
- *
  */
 function jovaitas_topbar_block_view($delta = '') {
 
@@ -95,31 +96,38 @@ function jovaitas_topbar_block_view($delta = '') {
 
   switch ($delta) {
     case 'block_top_bar':
-      $block['subject'] = t('My Block Title');
-      $block['content'] = _top_bar_content_callback();
+      $block['subject'] = t('Viršutinės juostos blockas.');
+      $block['content'] = jovaitas_topbar_content_callback();
       break;
   }
 
   return $block;
 }
 
-function _top_bar_content_callback() {
+/**
+ * Callback for block content.
+ *
+ * @return string
+ *   Html string.
+ */
+function jovaitas_topbar_content_callback() {
 
-  $content = variable_get('top_bar_content', 'Viršutines juostos tekstas.');
+  $content = variable_get('jovaitas_topbar_content', t('Viršutinės juostos tekstas.'));
 
-  $edit_url = "/admin/structure/block/manage/jovaitas_topbar/block_top_bar/configure";
-  return theme('top_bar_template', ['content' => $content, 'edit_url' => $edit_url]);
+  $edit_url = '/admin/structure/block/manage/jovaitas_topbar/block_top_bar/configure';
+  return theme('jovaitas_topbar_template', [
+    'content' => $content,
+    'edit_url' => $edit_url,
+  ]);
 }
 
 /**
  * Implements hook_theme().
- *
  */
 function jovaitas_topbar_theme() {
-
   return [
-    'top_bar_template' => [
-      'template'  => 'topbar'
-    ]
+    'jovaitas_topbar_template' => [
+      'template' => 'jovaitas-topbar',
+    ],
   ];
 }

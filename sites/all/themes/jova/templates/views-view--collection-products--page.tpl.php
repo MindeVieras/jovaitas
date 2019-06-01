@@ -21,7 +21,6 @@
  * - $empty: The empty text to display if the view is empty
  * - $pager: The pager next/prev links to display, if any
  * - $exposed: Exposed widget form/info to display
- * - $feed_icon: Feed icon to display, if any
  * - $more: A link to view more, if any
  * - $collection_title: The collection term title
  * - $collection_image_url: The collection term image url, if any.
@@ -118,12 +117,6 @@
   <?php if ($footer): ?>
     <div class="view-footer">
       <?php print $footer; ?>
-    </div>
-  <?php endif; ?>
-
-  <?php if ($feed_icon): ?>
-    <div class="feed-icon">
-      <?php print $feed_icon; ?>
     </div>
   <?php endif; ?>
 

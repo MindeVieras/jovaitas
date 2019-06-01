@@ -1,7 +1,7 @@
 name = Jovaitas - Viršutinė juosta
-description = Modulis skirtas virsutinei juostai, galima redaguoti teksta arba įjungti / išjungti kada reikia.
+description = Modulis skirtas viršutinei juostai, galima redaguoti tekstą arba įjungti / išjungti kada reikia.
 core = 7.x
 package = Jovaitas
 
-dependencies[] = drupal:block
+dependencies[] = block
 dependencies[] = jovaitas
