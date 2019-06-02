@@ -22,7 +22,7 @@
   &:nth-child(3n) {
     margin-right: 0;
   }
-  
+
   @include mq(sm){
     width: 47.5%;
     margin-right: 5%;
@@ -40,7 +40,7 @@
     width: 300px;
     margin-right: 0!important;
   }
-  
+
   &:hover{background-color:#fafafa}
 
   .image {
@@ -93,7 +93,7 @@
     position: relative;
     padding: 10px 15px 20px 20px;
   }
-  
+
   .title{
       padding: 7px 0;
       padding-right: 60px;
@@ -212,20 +212,20 @@
     @include mq(slg){
       width: 325px;
     }
-    
+
     @include mq(sm){
       width: 300px;
     }
-    
+
     @include mq(xs){
       width: 380px;
       margin-right: 0;
     }
-    
+
     @include mq(xxs){
       width: 100%;
     }
-    
+
     a {
       background-repeat: no-repeat;
       background-position: center center;
@@ -234,34 +234,34 @@
       display: block!important;
       width: 400px;
       height: 400px;
-      
+
       @include mq(slg){
         width: 325px;
         height: 325px;
       }
-      
+
       @include mq(sm){
         width: 300px;
         height: 300px;
       }
-      
+
       @include mq(xs){
         width: 380px;
         height: 380px;
       }
-      
+
       @include mq(xxs){
         width: 100%;
       }
 		}
   }
-  
+
 	.summary {
     display: flex;
     flex-direction: column;
-    
+
     @include mq(xs){width:100%;margin-top:25px}
-    
+
 		.title{
       font-family: "Roboto",sans-serif;
       font-size: 30px;
@@ -270,7 +270,7 @@
       color: #151515;
       @include mq(slg){font-size:26px;line-height:30px}
     }
-    
+
 		.kodas {
       font-size: $space * 2;
       margin-top: $space;
@@ -280,13 +280,13 @@
         margin-right: 5px;
       }
 		}
-    
+
     .price{
       color: $spray;
       font-size: 30px;
       margin: 10px 0 20px;
     }
-    
+
 		.org-price{
       color: #b1b1b1;
       font-size: 20px;
@@ -299,7 +299,7 @@
   }
 
 	.add-to-cart {
-    
+
     i, label {
       display: none;
     }
@@ -342,7 +342,7 @@
   .details {
     margin-top: $space * 2.5;
   }
-  
+
 	#tabs {
 		display: inline-block;
 		width: 100%;
@@ -350,12 +350,12 @@
 		margin-bottom: 30px;
 		border-radius: 0;
 		border: 0;
-    
+
     .tab {
       background-color: #e6e6e6;
       border: 1px solid #e1e1e1;
       border-radius: 0;
-      
+
       a {
         height: 60px;
         line-height: 60px;
@@ -375,7 +375,7 @@
       background: none;
       padding: 0;
     }
-    
+
     .tab-cont{
       border: 1px solid #e1e1e1;
     }

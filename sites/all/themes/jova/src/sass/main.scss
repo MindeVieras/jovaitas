@@ -121,7 +121,7 @@ legend{
   width: 100%;
   padding: 0 $space * 3;
   margin: 0 auto;
-  
+
 	// @include mq(slg){max-width:980px}
 	// @include mq(md){max-width:750px}
 	@include mq(sm){
@@ -136,7 +136,7 @@ legend{
 	display: flex;
   width: 100%;
   margin: $space * 3.5 0;
-  
+
   #sidebar-first {
     order: -1;
     margin-right: $space * 3;
@@ -147,7 +147,7 @@ legend{
   #content {
     width: 72.5%;
     flex: 1;
-    
+
     .content {
       font-size: 18px;
       line-height: 28px;
@@ -176,21 +176,21 @@ legend{
           }
         }
       }
-      
+
       em {
         font-style: italic;
       }
-      
+
       strong {
         font-weight: bold;
       }
-      
+
       u {
         text-decoration: underline;
       }
     }
   }
-  
+
   @include mq(slg){
 
     #sidebar-first {
@@ -212,7 +212,7 @@ legend{
   }
 }
 
-.content{       
+.content{
     table{
         border: 1px solid rgb(225, 225, 225);
         @include mq(xs){line-height:20px}
@@ -308,7 +308,7 @@ legend{
   border: none;
 
   .field-name-field-link {
-    
+
     a {
       position: absolute;
       top: 0;
@@ -320,7 +320,7 @@ legend{
       font-size: 0;
     }
   }
-  
+
   .views-field-title {
     position: absolute;
     bottom: 4%;
@@ -458,7 +458,7 @@ legend{
     display: inline-block;
     width: 100%;
     margin-top: 20px;
-    text-transform: uppercase;  
+    text-transform: uppercase;
     i{
         display: inline-block;
         font-size: 50px;
@@ -512,37 +512,47 @@ legend{
     }
 }
 
-.filters{
+.filters {
+  display: inline-block;
+  margin-top: 15px;
+
+  .filters-label {
     display: inline-block;
-    float: left;
-    margin-top: 15px;
-    .filters-label{
-        display: inline-block;
-        float: left;
-        color: #656565;
-        font-size: 14px;
-        margin-right: 10px;
+    color: #656565;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 8px 20px;
+    text-transform: uppercase;
+    background: #f5f5f5;
+    line-height: 14px;
+    color: #898e91;
+    border: 1px solid #e1e1e1;
+    background-clip: padding-box;
+    font-size: 14px;
+    margin: 0;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+
+  .dropdown-double-column {
+
+    ul {
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
     }
-    .btn{
-        display: inline-block;
-        padding: 8px 20px;
-        text-transform: uppercase;
-        background: #f5f5f5;
-        line-height: 14px;
-        color: #898e91;
-        border: 1px solid #e1e1e1;
-        background-clip: padding-box;
-        font-size: 14px;
-        margin: 0;
-        margin-right: 5px;
-        cursor: pointer;
-    }
+  }
 }
+
 .active-filters{
     display: inline-block;
     float: right;
     margin-top: 15px;
-    li{        
+    li{
         display: inline-block;
         padding: 8px 20px;
         text-transform: uppercase;

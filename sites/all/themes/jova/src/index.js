@@ -30,42 +30,17 @@ $(document).ready(() => {
   carousel.productCarousel('#product_carousel')
   carousel.productListCarousel('.karusele')
 
-
   // Categories Sidebar Menu
   const catsSidebar = $('#categories_sidebar')
-
   // Set active menu open
   catsSidebar.find('.active-trail').addClass('open')
-
   // Categories menu expand
   catsSidebar.find('.expand-icon').each((i, el) => {
-
     $(el).click(() => {
       $(el).closest('.expanded').toggleClass('open')
       console.log()
     })
   })
-
-
-  // // Set active parent menu items
-  // catsMenu.children('.active-trail').addClass('active-parent')
-
-  // // Wrapp and appent arrow icon to menu item
-  // catsMenu.find('.expanded').children('a').wrap('<div class="main-kat-link-wrap"></div>')
-  // $('<i class="fa fa-chevron-right"></i>').appendTo('.main-kat-link-wrap')
-
-  // // On expand arrow click expand child menu
-  // catsMenu.find('.expanded').not('.active-trail').each((i, el) => {
-  //   $(el).click(() => {
-  //     var menuHeight = $(el).find('.side-menu').children('li').length
-  //     var toggleHeight = $(el).find('.side-menu').height() == 0 ? 30*menuHeight+'px' : '0px'
-  //     $(el).find('.side-menu').animate({ maxHeight: toggleHeight })
-
-  //     $(HTMLAudioElement).toggleClass('clicked')
-
-  //   })
-  // })
-
 
   // Magnific Popup for certifications
   $('.cert-popup-wrap').magnificPopup({
@@ -75,7 +50,6 @@ $(document).ready(() => {
       enabled:true
     }
   })
-
   // Magnific Popup for product images
   $('.prod-img-popup').magnificPopup({
     delegate: 'a',

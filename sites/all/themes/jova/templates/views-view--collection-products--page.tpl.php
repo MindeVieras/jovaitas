@@ -47,7 +47,16 @@
         if (isset($lemp_tipas_block)) {
           print '<div data-dropdown="#lemp-tipas-filter" class="btn btn-danger">' . $lemp_tipas_block['subject'] . '</div>';
           print '<div class="dropdown-menu dropdown-anchor-left-center dropdown-has-anchor dark" id="lemp-tipas-filter">';
-          print render($lemp_tipas_block['content']);
+
+          if (count($lemp_tipas_block['content']['field_product:field_tipas_lemp']['#items']) > 20) {
+            print '<div class="dropdown-double-column">';
+          }
+            print render($lemp_tipas_block['content']);
+
+          if (count($lemp_tipas_block['content']['field_product:field_tipas_lemp']['#items']) > 20) {
+            print '</div>';
+          }
+
           print '</div>';
         }
 
