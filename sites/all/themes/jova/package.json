@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/MindeVieras/jovaitas#README",
   "dependencies": {
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery-ui": "^1.12.1",
     "magnific-popup": "^1.1.0",
     "slick-carousel": "^1.8.1",
